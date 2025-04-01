@@ -4,7 +4,9 @@
     "dependencies": {
         "device": "*",
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
-        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "browser-events": "*",
+        "pxt-mini-menu-cursor": "github:woofwoofcodes/pxt-mini-menu-cursor#v1.0.0"
     },
     "files": [
         "main.blocks",
@@ -28,7 +30,7 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "blocksprj",
+    "preferredEditor": "tsprj",
     "palette": [
         "#000000",
         "#FFFFFF",
