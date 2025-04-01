@@ -1,7 +1,7 @@
 # Race to fill in the blanks on the world map!
 
 
-> Open this page at [https://robbyzero.github.io/Geography-Dash/](https://robbyzero.github.io/geography-dash/)
+> Open this page at [https://robbyzero.github.io/Geography-Dash/](https://robbyzero.github.io/Geography-Dash/)
 
 
 ## Play instructions
