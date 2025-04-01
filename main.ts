@@ -14,7 +14,7 @@ namespace SpriteKind {
     export const count = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.indian, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundIndian == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Indian Ocean") {
@@ -46,7 +46,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.indian, function (sprite, otherS
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.northamerica, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundNorthAmerica == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "North America") {
@@ -77,11 +77,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.northamerica, function (sprite, 
         }
     }
 })
-function updateStopwatch (currTime: number) {
+function updateStopwatch(currTime: number) {
     stopwatch.setText(convertToText(currTime))
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.australia, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundAustralia == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Australia") {
@@ -112,16 +112,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.australia, function (sprite, oth
         }
     }
 })
-function getStarted () {
+function getStarted() {
     cursor = sprites.create(img`
+        . . f f . . 
+        . . f f . . 
         f f f f f f 
-        f 1 1 1 f . 
-        f 1 1 f . . 
-        f 1 f 1 f . 
-        f f . f 1 f 
-        f . . . f . 
+        f f f f f f 
+        . . f f . . 
+        . . f f . . 
         `, SpriteKind.Player)
     controller.moveSprite(cursor)
+    cursor.setStayInScreen(true)
     stopwatch = textsprite.create("0")
     stopwatch.setMaxFontHeight(12)
     stopwatch.setOutline(1, 8)
@@ -145,7 +146,7 @@ function getStarted () {
     startTime = game.runtime()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.antarctica, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundAntarctica == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Antarctica") {
@@ -176,116 +177,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.antarctica, function (sprite, ot
         }
     }
 })
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mainMenuOpen == 0) {
-        mainMenuOpen = 1
-        cursor.setImage(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `)
-        controller.moveSprite(cursor, 0, 0)
-        if (gameType == 0) {
-            piece = miniMenu.createMenu(
-            miniMenu.createMenuItem("North America"),
-            miniMenu.createMenuItem("South America"),
-            miniMenu.createMenuItem("Africa"),
-            miniMenu.createMenuItem("Europe"),
-            miniMenu.createMenuItem("Asia"),
-            miniMenu.createMenuItem("Australia"),
-            miniMenu.createMenuItem("Antarctica")
-            )
-            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.Border, 2)
-            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.BorderColor, 3)
-            piece.onButtonPressed(controller.A, function (selection, selectedIndex) {
-                cursor.setImage(img`
-                    f f f f f f 
-                    f 1 1 1 f . 
-                    f 1 1 f . . 
-                    f 1 f 1 f . 
-                    f f . f 1 f 
-                    f . . . f . 
-                    `)
-                controller.moveSprite(cursor, 100, 100)
-                piece.close()
-                currSelection = selection
-                mainMenuOpen = 0
-            })
-        } else if (gameType == 1) {
-            piece = miniMenu.createMenu(
-            miniMenu.createMenuItem("Pacific Ocean"),
-            miniMenu.createMenuItem("Atlantic Ocean"),
-            miniMenu.createMenuItem("Southern Ocean"),
-            miniMenu.createMenuItem("Indian Ocean"),
-            miniMenu.createMenuItem("Arctic Ocean")
-            )
-            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.Border, 2)
-            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.BorderColor, 3)
-            piece.onButtonPressed(controller.A, function (selection, selectedIndex) {
-                cursor.setImage(img`
-                    f f f f f f 
-                    f 1 1 1 f . 
-                    f 1 1 f . . 
-                    f 1 f 1 f . 
-                    f f . f 1 f 
-                    f . . . f . 
-                    `)
-                controller.moveSprite(cursor, 100, 100)
-                piece.close()
-                currSelection = selection
-                mainMenuOpen = 0
-            })
-        } else if (gameType == 2) {
-            piece = miniMenu.createMenu(
-            miniMenu.createMenuItem("North America"),
-            miniMenu.createMenuItem("South America"),
-            miniMenu.createMenuItem("Africa"),
-            miniMenu.createMenuItem("Europe"),
-            miniMenu.createMenuItem("Asia"),
-            miniMenu.createMenuItem("Australia"),
-            miniMenu.createMenuItem("Antarctica"),
-            miniMenu.createMenuItem("Pacific Ocean"),
-            miniMenu.createMenuItem("Atlantic Ocean"),
-            miniMenu.createMenuItem("Southern Ocean"),
-            miniMenu.createMenuItem("Indian Ocean"),
-            miniMenu.createMenuItem("Arctic Ocean")
-            )
-            piece.setDimensions(100, 80)
-            piece.setPosition(75, 60)
-            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.Border, 2)
-            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.BorderColor, 3)
-            piece.onButtonPressed(controller.A, function (selection, selectedIndex) {
-                cursor.setImage(img`
-                    f f f f f f 
-                    f 1 1 1 f . 
-                    f 1 1 f . . 
-                    f 1 f 1 f . 
-                    f f . f 1 f 
-                    f . . . f . 
-                    `)
-                controller.moveSprite(cursor, 100, 100)
-                piece.close()
-                currSelection = selection
-                mainMenuOpen = 0
-            })
-        }
-    }
-})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.southamerica, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundSouthAmerica == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "South America") {
@@ -316,15 +209,18 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.southamerica, function (sprite, 
         }
     }
 })
+browserEvents.MouseLeft.onEvent(browserEvents.MouseButtonEvent.Pressed, function (x, y) {
+    miniMenu.pressButton(ControllerButton.A)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Title == 1) {
         Title = 0
         sprites.destroy(tempSprite)
         sprites.destroy(titleImage)
         mainMenu = miniMenu.createMenu(
-        miniMenu.createMenuItem("Land"),
-        miniMenu.createMenuItem("Oceans"),
-        miniMenu.createMenuItem("Both")
+            miniMenu.createMenuItem("Land"),
+            miniMenu.createMenuItem("Oceans"),
+            miniMenu.createMenuItem("Both")
         )
         mainMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.Border, 2)
         mainMenu.setMenuStyleProperty(miniMenu.MenuStyleProperty.BorderColor, 3)
@@ -340,22 +236,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 mainMenu.close()
             }
             game.setDialogCursor(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . f f f f f f f . . . . 
-                . . . f f 3 3 3 7 3 3 3 f f . . 
-                . . f 3 3 7 7 3 3 7 7 3 3 3 f . 
-                . . f 7 7 7 7 3 3 3 3 3 3 3 f . 
-                . f 7 7 7 7 3 3 3 3 7 7 7 7 3 f 
-                . f 7 7 7 3 3 3 3 3 7 7 7 7 7 f 
-                . f 3 7 7 3 3 3 3 3 7 7 7 7 7 f 
-                . f 3 7 3 3 3 3 3 3 3 7 7 7 7 f 
-                . f 3 7 7 3 3 3 3 3 3 7 7 7 7 f 
-                . f 3 3 7 3 3 7 7 3 3 3 7 7 3 f 
-                . f 3 7 7 7 3 7 7 7 7 3 7 3 3 f 
-                . . f 7 7 7 3 3 7 7 3 3 3 3 f . 
-                . . f 7 7 3 3 3 7 3 3 3 3 3 f . 
-                . . . f f 3 3 3 7 3 3 3 f f . . 
-                . . . . . f f f f f f f . . . . 
+                f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f 
+                f 1 1 f f 1 1 f f f 1 1 1 1 f 1 1 1 1 f f 1 1 f f f f 1 1 f 
+                1 1 f 1 1 f 1 f 1 1 f 1 1 f 1 f 1 1 f 1 1 f 1 f 1 1 1 1 1 1 
+                1 1 f 1 1 1 1 f 1 1 f 1 1 f 1 f 1 1 f 1 1 1 1 f 1 1 1 1 1 1 
+                1 1 1 f f 1 1 f f f 1 1 1 f f f 1 1 f 1 1 1 1 f f f f 1 1 1 
+                1 1 1 1 1 f 1 f 1 1 1 1 f 1 1 1 f 1 f 1 1 1 1 f 1 1 1 1 1 1 
+                1 1 f 1 1 f 1 f 1 1 1 1 f 1 1 1 f 1 f 1 1 f 1 f 1 1 1 1 1 1 
+                f 1 1 f f 1 1 f 1 1 1 1 f 1 1 1 f 1 1 f f 1 1 f f f f 1 1 f 
+                f f 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 f f 
                 `)
             game.setDialogFrame(img`
                 ..bbbbbbbbbbbbbbbbbbbb..
@@ -667,8 +556,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         })
     }
 })
+browserEvents.onWheel(function (dx, dy, dz) {
+    if (dy > 0) {
+        miniMenu.scrollMenus(miniMenu.MenuScroll.Down)
+    } else if (dy < 0) {
+        miniMenu.scrollMenus(miniMenu.MenuScroll.Up)
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.africa, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundAfrica == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Africa") {
@@ -700,7 +596,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.africa, function (sprite, otherS
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.pacific, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundPacific == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Pacific Ocean") {
@@ -732,7 +628,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.pacific, function (sprite, other
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.southern, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundSouthern == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Southern Ocean") {
@@ -764,7 +660,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.southern, function (sprite, othe
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.europe, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundEurope == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Europe") {
@@ -796,7 +692,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.europe, function (sprite, otherS
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.atlantic, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundAtlantic == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Atlantic Ocean") {
@@ -828,7 +724,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.atlantic, function (sprite, othe
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.asia, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundAsia == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Asia") {
@@ -859,8 +755,121 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.asia, function (sprite, otherSpr
         }
     }
 })
+browserEvents.onMouseMove(function (x, y) {
+    if (mainMenuOpen == 0) {
+        cursor.setPosition(x, y)
+    }
+})
+browserEvents.MouseRight.onEvent(browserEvents.MouseButtonEvent.Pressed, function (x, y) {
+    if (mainMenuOpen == 0) {
+        mainMenuOpen = 1
+        cursor.setImage(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `)
+        controller.moveSprite(cursor, 0, 0)
+        if (gameType == 0) {
+            piece = miniMenu.createMenu(
+                miniMenu.createMenuItem("North America"),
+                miniMenu.createMenuItem("South America"),
+                miniMenu.createMenuItem("Africa"),
+                miniMenu.createMenuItem("Europe"),
+                miniMenu.createMenuItem("Asia"),
+                miniMenu.createMenuItem("Australia"),
+                miniMenu.createMenuItem("Antarctica")
+            )
+            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.Border, 2)
+            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.BorderColor, 3)
+            piece.onButtonPressed(controller.A, function (selection, selectedIndex) {
+                cursor.setImage(img`
+                    . . f f . . 
+                    . . f f . . 
+                    f f f f f f 
+                    f f f f f f 
+                    . . f f . . 
+                    . . f f . . 
+                    `)
+                controller.moveSprite(cursor, 100, 100)
+                piece.close()
+                currSelection = selection
+                mainMenuOpen = 0
+            })
+        } else if (gameType == 1) {
+            piece = miniMenu.createMenu(
+                miniMenu.createMenuItem("Pacific Ocean"),
+                miniMenu.createMenuItem("Atlantic Ocean"),
+                miniMenu.createMenuItem("Southern Ocean"),
+                miniMenu.createMenuItem("Indian Ocean"),
+                miniMenu.createMenuItem("Arctic Ocean")
+            )
+            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.Border, 2)
+            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.BorderColor, 3)
+            piece.onButtonPressed(controller.A, function (selection, selectedIndex) {
+                cursor.setImage(img`
+                    . . f f . . 
+                    . . f f . . 
+                    f f f f f f 
+                    f f f f f f 
+                    . . f f . . 
+                    . . f f . . 
+                    `)
+                controller.moveSprite(cursor, 100, 100)
+                piece.close()
+                currSelection = selection
+                mainMenuOpen = 0
+            })
+        } else if (gameType == 2) {
+            piece = miniMenu.createMenu(
+                miniMenu.createMenuItem("North America"),
+                miniMenu.createMenuItem("South America"),
+                miniMenu.createMenuItem("Africa"),
+                miniMenu.createMenuItem("Europe"),
+                miniMenu.createMenuItem("Asia"),
+                miniMenu.createMenuItem("Australia"),
+                miniMenu.createMenuItem("Antarctica"),
+                miniMenu.createMenuItem("Pacific Ocean"),
+                miniMenu.createMenuItem("Atlantic Ocean"),
+                miniMenu.createMenuItem("Southern Ocean"),
+                miniMenu.createMenuItem("Indian Ocean"),
+                miniMenu.createMenuItem("Arctic Ocean")
+            )
+            piece.setDimensions(100, 80)
+            piece.setPosition(75, 60)
+            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.Border, 2)
+            piece.setMenuStyleProperty(miniMenu.MenuStyleProperty.BorderColor, 3)
+            piece.onButtonPressed(controller.A, function (selection, selectedIndex) {
+                cursor.setImage(img`
+                    . . f f . . 
+                    . . f f . . 
+                    f f f f f f 
+                    f f f f f f 
+                    . . f f . . 
+                    . . f f . . 
+                    `)
+                controller.moveSprite(cursor, 100, 100)
+                piece.close()
+                currSelection = selection
+                mainMenuOpen = 0
+            })
+        }
+    }
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.arctic, function (sprite, otherSprite) {
-    if (controller.A.isPressed()) {
+    if (browserEvents.MouseLeft.isPressed()) {
         if (foundArctic == 0) {
             if (MenuOpen == 0) {
                 if (currSelection == "Arctic Ocean") {
@@ -892,6 +901,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.arctic, function (sprite, otherS
     }
 })
 let foundArctic = 0
+let piece: miniMenu.MenuSprite = null
 let foundAtlantic = 0
 let foundSouthern = 0
 let foundPacific = 0
@@ -903,10 +913,9 @@ let aisa: Sprite = null
 let europe2: Sprite = null
 let africa2: Sprite = null
 let _54321: Sprite = null
+let gameType = 0
 let mainMenu: miniMenu.MenuSprite = null
 let southamerica2: Sprite = null
-let piece: miniMenu.MenuSprite = null
-let gameType = 0
 let antarctica2: Sprite = null
 let startTime = 0
 let cursor: Sprite = null
@@ -1117,6 +1126,11 @@ titleImage = sprites.create(img`
 titleImage.setPosition(-50, 60)
 titleImage.setVelocity(50, 0)
 game.onUpdate(function () {
+    if (timerIsRunning) {
+        updateStopwatch((game.runtime() - startTime) / 1000)
+    }
+})
+game.onUpdate(function () {
     if (gameType == 0) {
         if (found == 7) {
             sprites.destroy(stopwatch)
@@ -1137,10 +1151,5 @@ game.onUpdate(function () {
             game.splash("You finished!" + " Score: " + (game.runtime() - startTime) / 1000 + " With " + numOfWrongGuess + " Wrong Answers!")
             game.reset()
         }
-    }
-})
-game.onUpdate(function () {
-    if (timerIsRunning) {
-        updateStopwatch((game.runtime() - startTime) / 1000)
     }
 })
