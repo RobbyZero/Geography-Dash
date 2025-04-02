@@ -6,7 +6,8 @@
         "arcade-mini-menu": "github:riknoll/arcade-mini-menu#v0.0.1",
         "arcade-text": "github:microsoft/arcade-text#v1.3.0",
         "browser-events": "*",
-        "pxt-mini-menu-cursor": "github:woofwoofcodes/pxt-mini-menu-cursor#v1.0.0"
+        "pxt-mini-menu-cursor": "github:woofwoofcodes/pxt-mini-menu-cursor#v1.0.0",
+        "Timers": "github:microsoft/arcade-timers#v1.1.0"
     },
     "files": [
         "main.blocks",
